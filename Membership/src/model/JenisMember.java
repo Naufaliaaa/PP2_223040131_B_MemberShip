@@ -1,38 +1,29 @@
 package model;
 
 public class JenisMember {
-    private String id;
-    private String nama;
+    private String id;    // ID jenis member
+    private String nama;   // Nama jenis member
 
-    public void setId(String id)
-    {
+    // Constructor kosong untuk inisialisasi objek
+    public JenisMember() {}
+
+    // Method setter untuk id
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getId()
-    {
+    // Method getter untuk id
+    public String getId() {
         return id;
     }
 
-    public void setNama (String nama)
-    {
+    // Method setter untuk nama
+    public void setNama(String nama) {
         this.nama = nama;
     }
 
-    public String getNama()
-    {
+    // Method getter untuk nama
+    public String getNama() {
         return nama;
     }
-
-    public void setJenisMember (JenisMember jenisMember)
-
-    {
-    this.jenisMember =jenisMember;
-    }
-
-    public JenisMember getJenisMember()
-    {
-    return jenisMember;
-    }
-
 }

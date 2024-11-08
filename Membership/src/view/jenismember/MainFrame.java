@@ -1,4 +1,4 @@
-package  view.main;
+package view.main;
 
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -13,67 +13,84 @@ import dao.MemberDao;
 
 public class MainFrame extends JFrame {
 
+    // Frame untuk mengelola JenisMember dan Member
     private JenisMemberFrame jenisMemberFrame;
     private MemberFrame memberFrame;
+
+    // Tombol untuk membuka frame JenisMember dan Member
     private JButton buttonJenisMember;
     private JButton buttonMember;
+
+    // Objek DAO untuk JenisMember dan Member
     private JenisMemberDao jenisMemberDao;
     private MemberDao memberDao;
 
+    // Konstruktor MainFrame
     public MainFrame() {
+        // Pengaturan frame utama
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(400, 500);
+
+        // Inisialisasi DAO
         this.jenisMemberDao = new JenisMemberDao();
-    this.memberDao = new MemberDao();
+        this.memberDao = new MemberDao();
 
-    this.jenisMemberFrame = new JenisMemberFrame(jenisMemberDao);
-    this.memberFrame = new MemberFrame(memberDao, jenisMemberDao);
+        // Inisialisasi frame jenisMember dan member dengan DAO terkait
+        this.jenisMemberFrame = new JenisMemberFrame(jenisMemberDao);
+        this.memberFrame = new MemberFrame(memberDao, jenisMemberDao);
 
-    this.setLayout(new FlowLayout());
+        // Set layout untuk frame
+        this.setLayout(new FlowLayout());
 
-    MainButtonActionListener actionListener = new MainButtonActionListener(this);
+        // Inisialisasi ActionListener untuk tombol
+        MainButtonActionListener actionListener = new MainButtonActionListener(this);
 
-    this.buttonJenisMember = new JButton("Jenis Member");
-    this.buttonMember = new JButton("Member");
+        // Inisialisasi tombol dan menambahkan listener
+        this.buttonJenisMember = new JButton("Jenis Member");
+        this.buttonMember = new JButton("Member");
 
-    this.buttonJenisMember.addActionListener(actionListener);
-    this.buttonMember.addActionListener(actionListener);
+        this.buttonJenisMember.addActionListener(actionListener);
+        this.buttonMember.addActionListener(actionListener);
 
-    this.add(buttonJenisMember);
-    this.add(buttonMember);
+        // Menambahkan tombol ke frame
+        this.add(buttonJenisMember);
+        this.add(buttonMember);
     }
 
+    // Getter untuk buttonJenisMember
     public JButton getButtonJenisMember() {
-    return buttonJenisMember;
+        return buttonJenisMember;
     }
 
+    // Getter untuk buttonMember
     public JButton getButtonMember() {
-    return buttonMember;
+        return buttonMember;
     }
 
+    // Method untuk menampilkan frame JenisMember
     public void showJenisMemberFrame() {
-    if (jenisMemberFrame == null) {
-        jenisMemberFrame = new JenisMemberFrame(jenisMemberDao);
-    }
-    jenisMemberFrame.setVisible(true);
-    }
-
-    public void showMemberFrame() {
-    if (memberFrame == null) {
-        memberFrame = new MemberFrame(memberDao, jenisMemberDao);
-        memberFrame.populateComboJenis();
-    }
-    memberFrame.setVisible(true);
-    }
-
-    public static void main(String[] args) {
-    javax.swing.SwingUtilities.invokeLater(new Runnable() {
-        public void run() {
-            MainFrame f = new MainFrame();
-            f.setVisible(true);
+        if (jenisMemberFrame == null) {  // Memastikan hanya ada satu instance dari JenisMemberFrame
+            jenisMemberFrame = new JenisMemberFrame(jenisMemberDao);
         }
-    });
+        jenisMemberFrame.setVisible(true);  // Menampilkan frame JenisMember
     }
 
+    // Method untuk menampilkan frame Member
+    public void showMemberFrame() {
+        if (memberFrame == null) {  // Memastikan hanya ada satu instance dari MemberFrame
+            memberFrame = new MemberFrame(memberDao, jenisMemberDao);
+            memberFrame.populateComboJenis();  // Mengisi dropdown jenis member di MemberFrame
+        }
+        memberFrame.setVisible(true);  // Menampilkan frame Member
+    }
 
+    // Method main untuk menjalankan aplikasi
+    public static void main(String[] args) {
+        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                MainFrame f = new MainFrame();
+                f.setVisible(true);  // Menampilkan frame utama
+            }
+        });
+    }
 }
